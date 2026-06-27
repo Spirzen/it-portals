@@ -1,93 +1,47 @@
-# Деплой на GitHub Pages
+# Деплой status.spirzen.ru
 
-## Ограничение GitHub Pages
+## GitHub Pages
 
-**Один репозиторий → один custom domain** (CNAME).
+1. Repo **Spirzen/it-portals** → Settings → Pages.
+2. Source: **GitHub Actions**.
+3. Custom domain: `status.spirzen.ru` (файл `public/CNAME` уже есть).
+4. Enforce HTTPS — включить после верификации DNS.
 
-В monorepo `it-portals` несколько сайтов в `sites/*`, но только **один** может использовать GitHub Pages custom domain этого репо.
-
-## Текущая схема
-
-| Портал | Workflow | Artifact | Domain |
-|--------|----------|----------|--------|
-| terms | `deploy-terms.yml` (push main) | `sites/terms/dist` | **terms.spirzen.ru** |
-| lab, games, kids, tools | `deploy-portal-manual.yml` | artifact only | см. ниже |
-
-### terms.spirzen.ru
-
-1. В GitHub repo **Settings → Pages → Build: GitHub Actions**.
-2. Workflow `Deploy terms.spirzen.ru` публикует `sites/terms/dist`.
-3. Файл `sites/terms/public/CNAME` содержит `terms.spirzen.ru`.
-4. DNS у регистратора:
-   - `CNAME terms → <user>.github.io` **или**
-   - A/AAAA записи GitHub Pages (см. актуальную доку GitHub).
-
-### Остальные поддомены (варианты)
-
-**A. Отдельный репозиторий на портал (классика GH Pages)**
+## DNS
 
 ```
-Spirzen/it-portals-lab   → lab.spirzen.ru
-Spirzen/it-portals-games → games.spirzen.ru
-…
+status.spirzen.ru  CNAME  spirzen.github.io
 ```
 
-CI в monorepo собирает site, action пушит `dist/` в deploy-repo (PAT `DEPLOY_TOKEN`).
+(или CNAME на `<user>.github.io` — как настроено для остальных поддоменов.)
 
-**B. Cloudflare Pages**
+## Workflows
 
-Один git repo, несколько projects:
+| Workflow | Триггер | Действие |
+|----------|---------|----------|
+| `deploy.yml` | push main | check status → build → GitHub Pages |
+| `update-status.yml` | cron */10 min | check status → commit `status.json` |
+| `ci.yml` | PR / push | build без деплоя |
 
-| Project | Root directory | Domain |
-|---------|----------------|--------|
-| itu-terms | `sites/terms` | terms.spirzen.ru |
-| itu-lab | `sites/lab` | lab.spirzen.ru |
+## Переменные сборки
 
-Build command: `cd ../.. && npm ci && npm run build:terms` (настроить в CF).
+| Env | Значение prod |
+|-----|---------------|
+| `IT_STATUS_SITE` | `https://status.spirzen.ru` |
+| `IT_STATUS_BASE` | `/` |
 
-**C. Временный preview**
-
-Без DNS — `npx wrangler pages dev` или `astro preview` локально.
-
-## CI
-
-| Workflow | Trigger | Что делает |
-|----------|---------|------------|
-| `ci.yml` | push, PR | matrix build всех 5 sites |
-| `deploy-terms.yml` | push main (paths) | sync glossary + deploy terms |
-| `deploy-portal-manual.yml` | manual | build + artifact |
-
-## Sync контента в CI
-
-`deploy-terms.yml` и CI для terms клонируют `Spirzen/it-knowledge-base` и запускают `sync-glossary.mjs`.
-
-Если clone недоступен — используется закоммиченный `content/glossary/` (`continue-on-error: true`).
-
-**Рекомендация для prod:** коммитить `content/glossary` после sync, не зависеть от clone в CI.
-
-## Env prod build
+## Локальная проверка перед push
 
 ```bash
-IT_TERMS_SITE=https://terms.spirzen.ru IT_TERMS_BASE=/ npm run build:terms
-IT_LAB_SITE=https://lab.spirzen.ru IT_LAB_BASE=/ npm run build:lab
-# …
+npm ci
+npm run check:status
+npm run build
+npm run preview   # http://localhost:4335
 ```
 
-## Проверка после деплоя
+## Первый деплой
 
-- [ ] https://terms.spirzen.ru/glossary/intro
-- [ ] https://terms.spirzen.ru/glossary/Д (кириллица в URL)
-- [ ] Theme toggle сохраняется
-- [ ] Nav ведёт на spirzen.ru, code, play
-- [ ] CNAME не перезаписывается (Astro копирует `public/CNAME` в dist)
-
-## it-management (план)
-
-Добавить проекты в локальную панель:
-
-| id | port | path |
-|----|------|------|
-| portals-terms | 4330 | sites/terms |
-| portals-lab | 4331 | sites/lab |
-
-См. it-knowledge-base/info/ECOSYSTEM.md после интеграции.
+1. Push в `main`.
+2. Дождаться `Deploy to GitHub Pages`.
+3. Проверить https://status.spirzen.ru — 18 карточек, summary bar.
+4. Убедиться, что `update-status.yml` имеет permission на push (для bot commit).

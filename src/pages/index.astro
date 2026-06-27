@@ -1,0 +1,290 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import '../styles/hub.css';
+import servicesData from '../data/services.json';
+
+const {services, categories} = servicesData;
+
+const statusPath = path.join(process.cwd(), 'public/status.json');
+const fallbackSnapshot = {
+  generatedAt: new Date(0).toISOString(),
+  summary: {total: services.length, up: 0, degraded: 0, down: 0},
+  services: {} as Record<string, {state: string; latency: number; httpStatus: number; checkedAt: string}>,
+};
+
+let snapshot = fallbackSnapshot;
+try {
+  snapshot = JSON.parse(fs.readFileSync(statusPath, 'utf8'));
+} catch {
+  /* prebuild ещё не запускался */
+}
+
+const statusLabels: Record<string, string> = {
+  up: 'Online',
+  degraded: 'Degraded',
+  down: 'Offline',
+  checking: 'Checking',
+  unknown: 'Unknown',
+};
+
+const grouped = Object.entries(categories).map(([key, cat]) => ({
+  key,
+  ...cat,
+  items: services.filter((s) => s.category === key),
+}));
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Хаб экосистемы «Вселенная IT» — все сервисы spirzen.ru в одном месте со статусом доступности." />
+    <meta name="theme-color" content="#06060b" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>Вселенная IT — хаб экосистемы</title>
+  </head>
+  <body>
+    <div class="hub-bg" aria-hidden="true"></div>
+
+    <main class="hub">
+      <header class="hub-header">
+        <div class="hub-badge">
+          <span class="hub-badge-dot" id="live-dot"></span>
+          status.spirzen.ru
+        </div>
+        <h1 class="hub-title">Вселенная IT</h1>
+        <p class="hub-subtitle">
+          Единый портал ко всем сервисам образовательной экосистемы —
+          энциклопедия, инструменты, лаборатории и интерактив в одной сетке.
+        </p>
+      </header>
+
+      <section class="summary-bar" aria-label="Сводка статусов">
+        <div class="summary-stat summary-stat--up">
+          <strong id="stat-up">{snapshot.summary.up}</strong>
+          <span>online</span>
+        </div>
+        <div class="summary-divider" aria-hidden="true"></div>
+        <div class="summary-stat summary-stat--degraded">
+          <strong id="stat-degraded">{snapshot.summary.degraded}</strong>
+          <span>degraded</span>
+        </div>
+        <div class="summary-divider" aria-hidden="true"></div>
+        <div class="summary-stat summary-stat--down">
+          <strong id="stat-down">{snapshot.summary.down}</strong>
+          <span>offline</span>
+        </div>
+        <div class="summary-divider" aria-hidden="true"></div>
+        <div class="summary-meta">
+          из <span id="stat-total">{snapshot.summary.total}</span> сервисов ·
+          <span id="last-checked">{new Date(snapshot.generatedAt).toLocaleString('ru-RU')}</span>
+        </div>
+      </section>
+
+      <div class="toolbar">
+        <div class="search-wrap">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input type="search" id="search" placeholder="Поиск сервиса или домена…" autocomplete="off" />
+        </div>
+        <div class="filters" id="filters" role="group" aria-label="Фильтр по категории">
+          <button type="button" class="filter-btn is-active" data-filter="all">Все</button>
+          {Object.entries(categories).map(([key, cat]) => (
+            <button type="button" class="filter-btn" data-filter={key}>{cat.label}</button>
+          ))}
+        </div>
+        <button type="button" class="refresh-btn" id="refresh" title="Обновить статусы">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12a9 9 0 1 1-2.64-6.36"/>
+            <polyline points="21 3 21 9 15 9"/>
+          </svg>
+          Обновить
+        </button>
+      </div>
+
+      {grouped.map((group) => (
+        group.items.length > 0 && (
+          <section data-category-section={group.key}>
+            <h2 class="section-label">{group.label}</h2>
+            <div class="grid">
+              {group.items.map((svc) => {
+                const st = snapshot.services[svc.id];
+                const state = st?.state ?? 'unknown';
+                return (
+                  <a
+                    class="card"
+                    href={svc.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-service-id={svc.id}
+                    data-category={svc.category}
+                    data-search={`${svc.name} ${svc.domain} ${svc.description}`.toLowerCase()}
+                    style={`--card-accent: ${svc.accent}`}
+                  >
+                    <div class="card-top">
+                      <div class="card-icon" aria-hidden="true">{svc.glyph}</div>
+                      <span class="status-pill" data-state={state} data-status-for={svc.id}>
+                        <span class="status-dot"></span>
+                        <span class="status-label">{statusLabels[state] ?? state}</span>
+                      </span>
+                    </div>
+                    <div>
+                      <h3 class="card-name">{svc.name}</h3>
+                      <p class="card-domain">{svc.domain}</p>
+                    </div>
+                    <p class="card-desc">{svc.description}</p>
+                    <div class="card-footer">
+                      <span class="card-latency" data-latency-for={svc.id}>
+                        {st?.latency != null ? `${st.latency} ms` : '—'}
+                      </span>
+                      <span class="card-arrow" aria-hidden="true">↗</span>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+          </section>
+        )
+      ))}
+
+      <footer class="hub-footer">
+        <p>
+          Экосистема <a href="https://spirzen.ru">spirzen.ru</a> ·
+          проверка доступности каждые 10 мин ·
+          <a href="https://github.com/Spirzen/it-portals">it-portals</a>
+        </p>
+      </footer>
+    </main>
+
+    <script define:vars={{ services }}>
+      const STATUS_LABELS = {
+        up: 'Online',
+        degraded: 'Degraded',
+        down: 'Offline',
+        checking: 'Checking',
+        unknown: 'Unknown',
+      };
+
+      let activeFilter = 'all';
+      const searchInput = document.getElementById('search');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const refreshBtn = document.getElementById('refresh');
+      const cards = document.querySelectorAll('.card');
+
+      function applyFilters() {
+        const q = (searchInput?.value ?? '').trim().toLowerCase();
+        cards.forEach((card) => {
+          const matchCat = activeFilter === 'all' || card.dataset.category === activeFilter;
+          const matchSearch = !q || (card.dataset.search ?? '').includes(q);
+          card.classList.toggle('is-hidden', !(matchCat && matchSearch));
+        });
+        document.querySelectorAll('[data-category-section]').forEach((section) => {
+          const visible = section.querySelectorAll('.card:not(.is-hidden)').length > 0;
+          section.style.display = visible ? '' : 'none';
+        });
+      }
+
+      searchInput?.addEventListener('input', applyFilters);
+      filterBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach((b) => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+          activeFilter = btn.dataset.filter ?? 'all';
+          applyFilters();
+        });
+      });
+
+      function updateSummary(data) {
+        const s = data.summary;
+        document.getElementById('stat-up').textContent = String(s.up);
+        document.getElementById('stat-degraded').textContent = String(s.degraded);
+        document.getElementById('stat-down').textContent = String(s.down);
+        document.getElementById('stat-total').textContent = String(s.total);
+        document.getElementById('last-checked').textContent = new Date(data.generatedAt).toLocaleString('ru-RU');
+      }
+
+      function applyStatus(data) {
+        updateSummary(data);
+        for (const [id, st] of Object.entries(data.services ?? {})) {
+          const pill = document.querySelector(`[data-status-for="${id}"]`);
+          const latency = document.querySelector(`[data-latency-for="${id}"]`);
+          if (pill) {
+            pill.dataset.state = st.state;
+            pill.querySelector('.status-label').textContent = STATUS_LABELS[st.state] ?? st.state;
+          }
+          if (latency && st.latency != null) {
+            latency.textContent = `${st.latency} ms`;
+          }
+        }
+      }
+
+      function setAllChecking() {
+        document.querySelectorAll('[data-status-for]').forEach((pill) => {
+          pill.dataset.state = 'checking';
+          pill.querySelector('.status-label').textContent = STATUS_LABELS.checking;
+        });
+      }
+
+      /** @param {string} url */
+      function pingImage(url) {
+        return new Promise((resolve) => {
+          const img = new Image();
+          const timer = setTimeout(() => {
+            img.src = '';
+            resolve({state: 'down', latency: 8000, httpStatus: 0});
+          }, 8000);
+          const started = Date.now();
+          img.onload = () => {
+            clearTimeout(timer);
+            resolve({state: 'up', latency: Date.now() - started, httpStatus: 200});
+          };
+          img.onerror = () => {
+            clearTimeout(timer);
+            resolve({state: 'down', latency: Date.now() - started, httpStatus: 0});
+          };
+          img.src = `${url.replace(/\/$/, '')}/favicon.ico?${Date.now()}`;
+        });
+      }
+
+      async function liveRefresh() {
+        refreshBtn?.classList.add('is-loading');
+        setAllChecking();
+        const results = {};
+        let up = 0;
+        let degraded = 0;
+        let down = 0;
+
+        await Promise.all(
+          services.map(async (svc) => {
+            const st = await pingImage(svc.url);
+            results[svc.id] = {...st, id: svc.id, domain: svc.domain, url: svc.url, checkedAt: new Date().toISOString()};
+            if (st.state === 'up') up++;
+            else if (st.state === 'degraded') degraded++;
+            else down++;
+          }),
+        );
+
+        applyStatus({
+          generatedAt: new Date().toISOString(),
+          summary: {total: services.length, up, degraded, down},
+          services: results,
+        });
+        refreshBtn?.classList.remove('is-loading');
+      }
+
+      refreshBtn?.addEventListener('click', liveRefresh);
+
+      async function loadSnapshot() {
+        try {
+          const res = await fetch(`/status.json?${Date.now()}`, {cache: 'no-store'});
+          if (res.ok) applyStatus(await res.json());
+        } catch {
+          /* keep SSR snapshot */
+        }
+      }
+
+      loadSnapshot();
+    </script>
+  </body>
+</html>

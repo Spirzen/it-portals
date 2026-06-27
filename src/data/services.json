@@ -1,0 +1,191 @@
+{
+  "categories": {
+    "core": { "label": "Ядро", "description": "Фундамент экосистемы" },
+    "learn": { "label": "Обучение", "description": "Знания, практика, проверка" },
+    "create": { "label": "Создание", "description": "Код, схемы, редакторы" },
+    "tools": { "label": "Инструменты", "description": "Утилиты и справочники" },
+    "play": { "label": "Игра", "description": "Интерактив и развлечения" }
+  },
+  "services": [
+    {
+      "id": "spirzen",
+      "name": "Энциклопедия",
+      "domain": "spirzen.ru",
+      "url": "https://spirzen.ru",
+      "description": "Главная база знаний — тысячи статей по IT",
+      "category": "core",
+      "accent": "#818cf8",
+      "glyph": "◈"
+    },
+    {
+      "id": "search",
+      "name": "Поиск",
+      "domain": "search.spirzen.ru",
+      "url": "https://search.spirzen.ru",
+      "description": "Поиск по всей экосистеме",
+      "category": "core",
+      "accent": "#38bdf8",
+      "glyph": "⌕"
+    },
+    {
+      "id": "assets",
+      "name": "Assets",
+      "domain": "assets.spirzen.ru",
+      "url": "https://assets.spirzen.ru",
+      "description": "Статические ресурсы и медиа CDN",
+      "category": "core",
+      "accent": "#94a3b8",
+      "glyph": "▣"
+    },
+    {
+      "id": "terms",
+      "name": "Глоссарий",
+      "domain": "terms.spirzen.ru",
+      "url": "https://terms.spirzen.ru",
+      "description": "Словарь IT-терминов от А до Я",
+      "category": "learn",
+      "accent": "#a78bfa",
+      "glyph": "Ab"
+    },
+    {
+      "id": "lab",
+      "name": "Лаборатория",
+      "domain": "lab.spirzen.ru",
+      "url": "https://lab.spirzen.ru",
+      "description": "Практические эксперименты и задачи",
+      "category": "learn",
+      "accent": "#34d399",
+      "glyph": "⚗"
+    },
+    {
+      "id": "exam",
+      "name": "Экзамены",
+      "domain": "exam.spirzen.ru",
+      "url": "https://exam.spirzen.ru",
+      "description": "Пробные экзамены и аттестация",
+      "category": "learn",
+      "accent": "#fbbf24",
+      "glyph": "✓"
+    },
+    {
+      "id": "quiz",
+      "name": "Квизы",
+      "domain": "quiz.spirzen.ru",
+      "url": "https://quiz.spirzen.ru",
+      "description": "Быстрые викторины по темам",
+      "category": "learn",
+      "accent": "#fb923c",
+      "glyph": "?"
+    },
+    {
+      "id": "kids",
+      "name": "Для детей",
+      "domain": "kids.spirzen.ru",
+      "url": "https://kids.spirzen.ru",
+      "description": "IT для самых маленьких",
+      "category": "learn",
+      "accent": "#f472b6",
+      "glyph": "☺"
+    },
+    {
+      "id": "code",
+      "name": "Code",
+      "domain": "code.spirzen.ru",
+      "url": "https://code.spirzen.ru",
+      "description": "Каталог примеров кода с подсветкой",
+      "category": "create",
+      "accent": "#22d3ee",
+      "glyph": "</>"
+    },
+    {
+      "id": "play",
+      "name": "Play",
+      "domain": "play.spirzen.ru",
+      "url": "https://play.spirzen.ru",
+      "description": "Интерактивные демо и симуляции",
+      "category": "create",
+      "accent": "#4ade80",
+      "glyph": "▶"
+    },
+    {
+      "id": "html",
+      "name": "WebEditor",
+      "domain": "html.spirzen.ru",
+      "url": "https://html.spirzen.ru",
+      "description": "Онлайн-редактор HTML, CSS и JavaScript",
+      "category": "create",
+      "accent": "#e879f9",
+      "glyph": "⟨⟩"
+    },
+    {
+      "id": "writer",
+      "name": "Writer",
+      "domain": "writer.spirzen.ru",
+      "url": "https://writer.spirzen.ru",
+      "description": "Редактор и публикация материалов",
+      "category": "create",
+      "accent": "#c084fc",
+      "glyph": "¶"
+    },
+    {
+      "id": "schema",
+      "name": "Schema",
+      "domain": "schema.spirzen.ru",
+      "url": "https://schema.spirzen.ru",
+      "description": "Диаграммы, схемы и визуализация",
+      "category": "create",
+      "accent": "#2dd4bf",
+      "glyph": "⬡"
+    },
+    {
+      "id": "sql",
+      "name": "SQL",
+      "domain": "sql.spirzen.ru",
+      "url": "https://sql.spirzen.ru",
+      "description": "SQL-песочница и запросы",
+      "category": "create",
+      "accent": "#60a5fa",
+      "glyph": "⊞"
+    },
+    {
+      "id": "tools",
+      "name": "Tools",
+      "domain": "tools.spirzen.ru",
+      "url": "https://tools.spirzen.ru",
+      "description": "Полезные утилиты для разработчиков",
+      "category": "tools",
+      "accent": "#a3e635",
+      "glyph": "⚙"
+    },
+    {
+      "id": "color",
+      "name": "Color",
+      "domain": "color.spirzen.ru",
+      "url": "https://color.spirzen.ru",
+      "description": "Палитры, конвертеры и подбор цвета",
+      "category": "tools",
+      "accent": "#f43f5e",
+      "glyph": "◉"
+    },
+    {
+      "id": "random",
+      "name": "Random",
+      "domain": "random.spirzen.ru",
+      "url": "https://random.spirzen.ru",
+      "description": "Генераторы случайных данных",
+      "category": "tools",
+      "accent": "#fcd34d",
+      "glyph": "∞"
+    },
+    {
+      "id": "games",
+      "name": "Games",
+      "domain": "games.spirzen.ru",
+      "url": "https://games.spirzen.ru",
+      "description": "IT-игры и головоломки",
+      "category": "play",
+      "accent": "#f97316",
+      "glyph": "♛"
+    }
+  ]
+}

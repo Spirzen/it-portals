@@ -1,59 +1,21 @@
 name: CI
 
 on:
+  pull_request:
   push:
     branches: [main, master]
-  pull_request:
-    branches: [main, master]
-  workflow_dispatch:
 
 jobs:
-  build-all-portals:
+  build:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        site:
-          - terms
-          - lab
-          - games
-          - kids
-          - tools
     steps:
       - uses: actions/checkout@v4
-
-      - name: Checkout it-knowledge-base (glossary sync)
-        if: matrix.site == 'terms'
-        uses: actions/checkout@v4
-        with:
-          repository: Spirzen/it-knowledge-base
-          path: it-knowledge-base
-          ref: main
-        continue-on-error: true
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Sync glossary content
-        if: matrix.site == 'terms'
-        run: IT_KB_ROOT=./it-knowledge-base node packages/sync/sync-glossary.mjs
-        continue-on-error: true
-
-      - name: Build portal
-        run: npm run build:${{ matrix.site }}
+      - run: npm ci
+      - run: npm run build
         env:
-          IT_TERMS_SITE: https://terms.spirzen.ru
-          IT_TERMS_BASE: /
-          IT_LAB_SITE: https://lab.spirzen.ru
-          IT_LAB_BASE: /
-          IT_GAMES_SITE: https://games.spirzen.ru
-          IT_GAMES_BASE: /
-          IT_KIDS_SITE: https://kids.spirzen.ru
-          IT_KIDS_BASE: /
-          IT_TOOLS_SITE: https://tools.spirzen.ru
-          IT_TOOLS_BASE: /
+          IT_STATUS_SITE: https://status.spirzen.ru
+          IT_STATUS_BASE: /
