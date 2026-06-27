@@ -57,7 +57,7 @@
 | ExternalPlayEmbed / CodeEmbed | ✅ | iframe + article chrome |
 | RandomGameGenerator | 🟡 | stub (список игр в MD ниже) |
 | KB integration | ✅ | exclude, redirects, sidebar, wikiLink |
-| Deploy tools.spirzen.ru | ⬜ | push it-tools → CI |
+| Deploy tools.spirzen.ru | ✅ | push it-tools → CI |
 | ITU loader на embed | ✅ | зеркало it-lab |
 
 ## Фаза 4 — UX экосистемы 🟡 в работе (2026-06-28)
@@ -67,17 +67,30 @@
 | Единая шапка EcosystemNav | ✅ | lab, tools, terms; **play**, **code** |
 | Единая тема `itu-portal-theme` | ✅ | play, code, lab, tools |
 | ITU loader (книга + орбы) | ✅ | KB redirects, embed play/code, lab/tools, play/code iframe |
-| WebEditor (html.spirzen.ru) шапка | ⬜ | репозиторий WebEditor вне monorepo |
+| WebEditor (html.spirzen.ru) шапка | ✅ | standalone `packages/shared/src/standalone/` |
+| SQL Generator (sql.spirzen.ru) шапка | ✅ | `public/itu/` + EcosystemNav |
+| Schema Maker (schema.spirzen.ru) шапка | ✅ | `public/itu/` + EcosystemNav |
 | Деплой code.spirzen.ru (postMessage origins) | ⬜ | parent-origin для lab/tools embed |
-| PDF через html2canvas | ⬜ | сейчас print; опционально |
-| Shared package вместо дублирования CSS | 🟡 | `it-portals/packages/shared` — loader, nav |
+| PDF через html2canvas | ⛔ | не нужен (print достаточно) |
+| Shared package вместо дублирования CSS | 🟡 | `it-portals/packages/shared` — loader, nav, **standalone/** для внешних repo |
 
-## Фаза 5 — games + kids ⬜
+## Фаза 5 — games + kids 🟢 мигрировано (2026-06-28)
 
-- Фильтр spinoff 9-03, 9-04, 9-11
-- games + gamedev — один портал, два раздела
-- kids — отдельная тема UI
-- EcosystemNav + ITU loader при старте
+| Шаг | Статус | Действие |
+|-----|--------|----------|
+| Sync spinoff 9-03 + 9-04 → it-games | ✅ | `npm run sync:games` (126 MD) |
+| Sync spinoff 9-11 → it-kids | ✅ | `npm run sync:kids` (80 MD) |
+| Маршруты `/games/…`, `/kids/…` | ✅ | catch-all + embed play/code |
+| Два раздела games (индустрия + gamedev) | ✅ | sidebar по `9-03` / `9-04` |
+| Kids UI theme | ✅ | `data-portal="kids"`, тёплая палитра |
+| Build games/kids | ✅ | 127 + 81 страниц |
+| KB: exclude spinoff paths | ✅ | docusaurus exclude |
+| KB: redirects | ✅ | `gamesExternalRedirects.json`, `kidsExternalRedirects.json` |
+| KB: wikiLinkIndex | ✅ | games + kids URLs |
+| KB: doc-search exclude | ✅ | −206 страниц spinoff |
+| Mobile ContentCatalog | ✅ | games + kids external |
+| Deploy games/kids GH Pages | ⬜ | push it-games, it-kids |
+| Закрепить content/ в репо | 🟡 | после sync, commit content/ |
 
 ## Скрипты миграции ссылок (KB)
 

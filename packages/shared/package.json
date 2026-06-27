@@ -7,6 +7,7 @@
   "exports": {
     "./ecosystem": "./src/ecosystem.mjs",
     "./theme": "./src/theme.js",
+    "./standalone/*": "./src/standalone/*",
     "./*": "./src/*"
   },
   "files": [
