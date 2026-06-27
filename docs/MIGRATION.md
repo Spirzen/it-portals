@@ -9,7 +9,7 @@
 3. **Интеграция через конфиг** — `ecosystem-urls.json` + правка генераторов индексов в KB.
 4. **По одному порталу** — terms → lab → tools → games/kids.
 
-## Фаза 1 — terms (глоссарий) 🟡 в работе
+| Фаза 1 — terms (глоссарий) | 🟢 мигрировано (2026-06-27) |
 
 | Шаг | Статус | Действие |
 |-----|--------|----------|
@@ -18,30 +18,43 @@
 | terms.spirzen.ru UI | ✅ | Astro, sidebar, theme, `/glossary/[slug]` |
 | CI build | ✅ | `.github/workflows/ci.yml` |
 | Deploy terms GH Pages | ✅ | `deploy-terms.yml` + CNAME |
-| KB: wikiLinkIndex → terms URL | ⬜ | правка `build-wiki-link-index.mjs` |
-| KB: убрать glossary из sidebar | ⬜ | stub + ссылка на terms |
-| KB: redirects `/glossary/*` | ⬜ | client-redirects или stub HTML |
-| KB: doc-search glossary → terms index | ⬜ | split search |
-| Mobile app search URLs | ⬜ | manifest |
-| Закоммитить content/glossary в it-portals | ⬜ | после первого sync |
+| KB: wikiLinkIndex → terms URL | ✅ | `build-wiki-link-index.mjs` |
+| KB: убрать glossary из sidebar | ✅ | ссылка на terms.spirzen.ru |
+| KB: redirects `/glossary/*` | ✅ | `glossaryExternalRedirects.json` |
+| KB: doc-search glossary → terms index | ✅ | exclude `glossary/**` |
+| Mobile app catalog | ✅ | ContentCatalog → terms |
+| Закоммитить content/glossary в it-terms | ⬜ | источник правды после sync |
 
-## Фаза 2 — lab 🟡 заготовка
+## Фаза 2 — lab 🟢 мигрировано (2026-06-28)
 
 | Шаг | Статус | Действие |
 |-----|--------|----------|
-| sites/lab placeholder | ✅ | landing |
-| Sync lab content | ⬜ | `npm run sync:lab` |
-| MDX/embed: ExternalPlayEmbed | ⬜ | React islands или iframe wrapper |
-| LabTrainersHub | ⬜ | порт в shared или lab site |
-| Маршруты `/lab/...` | ⬜ | catch-all как glossary |
-| quiz/exam/checklist внутри lab | ⬜ | без отдельных доменов |
-| Deploy lab.spirzen.ru | ⬜ | отдельный repo или CF Pages |
+| Repo it-lab (отдельный) | ✅ | `lab.spirzen.ru`, порт 4331 |
+| Sync lab content | ✅ | `npm run sync:lab` → `content/lab` |
+| Маршруты `/lab/…` | ✅ | catch-all `[...slug].astro`, кириллические slug |
+| ExternalPlayEmbed | ✅ | iframe play.spirzen.ru (PoC + roadmap) |
+| ExternalCodeEmbed | ✅ | iframe code.spirzen.ru |
+| LabTrainersHub | ✅ | каталог тренажёров + play embeds |
+| Deploy lab.spirzen.ru | ✅ | GitHub Pages |
+| KB: exclude `lab/**` | ✅ | docusaurus docs |
+| KB: redirects `/lab/*` | ✅ | `labExternalRedirects.json` (716 routes) |
+| KB: sidebar → lab external | ✅ | lab.spirzen.ru/lab/intro |
+| KB: doc-search без lab | ✅ | −180 страниц |
+| KB: wikiLinkIndex lab | ✅ | 180 статей → lab URL |
+| KB: wikiLink `/lab` rewrite | ✅ | `wikiLink.js` |
+| Mobile ContentCatalog | ✅ | lab.spirzen.ru |
+| Закрепить content/lab в it-lab | ⬜ | источник правды, удалить docs/lab из KB позже |
 
-## Фаза 3 — tools ⬜
+## Фаза 3 — tools 🟢 мигрировано (2026-06-28)
 
-- Перенос `docs/tools`
-- Интеграция spirzen.github.io утилит (WebEditor уже html.spirzen.ru)
-- Каталог + deep links
+| Шаг | Статус | Действие |
+|-----|--------|----------|
+| Repo it-tools | ✅ | `tools.spirzen.ru`, порт 4334 |
+| Sync + routing | ✅ | 65 страниц, `/tools/{category}/{id}` |
+| ExternalPlayEmbed | ✅ | iframe play.spirzen.ru |
+| RandomGameGenerator | 🟡 | stub (список игр в MD ниже) |
+| KB integration | ✅ | exclude, redirects, sidebar, wikiLink |
+| Deploy tools.spirzen.ru | ⬜ | push it-tools → CI |
 
 ## Фаза 4 — games + kids ⬜
 
