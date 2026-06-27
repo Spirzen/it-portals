@@ -32,7 +32,7 @@
 | Repo it-lab (отдельный) | ✅ | `lab.spirzen.ru`, порт 4331 |
 | Sync lab content | ✅ | `npm run sync:lab` → `content/lab` |
 | Маршруты `/lab/…` | ✅ | catch-all `[...slug].astro`, кириллические slug |
-| ExternalPlayEmbed | ✅ | iframe play.spirzen.ru (PoC + roadmap) |
+| ExternalPlayEmbed | ✅ | iframe play.spirzen.ru |
 | ExternalCodeEmbed | ✅ | iframe code.spirzen.ru |
 | LabTrainersHub | ✅ | каталог тренажёров + play embeds |
 | Deploy lab.spirzen.ru | ✅ | GitHub Pages |
@@ -43,6 +43,9 @@
 | KB: wikiLinkIndex lab | ✅ | 180 статей → lab URL |
 | KB: wikiLink `/lab` rewrite | ✅ | `wikiLink.js` |
 | Mobile ContentCatalog | ✅ | lab.spirzen.ru |
+| Article chrome (TOC, breadcrumbs, tags) | ✅ | sidebar collapse, share/PDF |
+| Полная ширина карточки статьи | ✅ | layout без `max-width` при sidebar/TOC |
+| ITU loader на embed play/code | ✅ | `itu-loader` в embed-host |
 | Закрепить content/lab в it-lab | ⬜ | источник правды, удалить docs/lab из KB позже |
 
 ## Фаза 3 — tools 🟢 мигрировано (2026-06-28)
@@ -51,20 +54,32 @@
 |-----|--------|----------|
 | Repo it-tools | ✅ | `tools.spirzen.ru`, порт 4334 |
 | Sync + routing | ✅ | 65 страниц, `/tools/{category}/{id}` |
-| ExternalPlayEmbed | ✅ | iframe play.spirzen.ru |
+| ExternalPlayEmbed / CodeEmbed | ✅ | iframe + article chrome |
 | RandomGameGenerator | 🟡 | stub (список игр в MD ниже) |
 | KB integration | ✅ | exclude, redirects, sidebar, wikiLink |
 | Deploy tools.spirzen.ru | ⬜ | push it-tools → CI |
+| ITU loader на embed | ✅ | зеркало it-lab |
 
-## Фаза 4 — games + kids ⬜
+## Фаза 4 — UX экосистемы 🟡 в работе (2026-06-28)
+
+| Шаг | Статус | Действие |
+|-----|--------|----------|
+| Единая шапка EcosystemNav | ✅ | lab, tools, terms; **play**, **code** |
+| Единая тема `itu-portal-theme` | ✅ | play, code, lab, tools |
+| ITU loader (книга + орбы) | ✅ | KB redirects, embed play/code, lab/tools, play/code iframe |
+| WebEditor (html.spirzen.ru) шапка | ⬜ | репозиторий WebEditor вне monorepo |
+| Деплой code.spirzen.ru (postMessage origins) | ⬜ | parent-origin для lab/tools embed |
+| PDF через html2canvas | ⬜ | сейчас print; опционально |
+| Shared package вместо дублирования CSS | 🟡 | `it-portals/packages/shared` — loader, nav |
+
+## Фаза 5 — games + kids ⬜
 
 - Фильтр spinoff 9-03, 9-04, 9-11
 - games + gamedev — один портал, два раздела
 - kids — отдельная тема UI
+- EcosystemNav + ITU loader при старте
 
 ## Скрипты миграции ссылок (KB)
-
-Планируемые скрипты в `it-knowledge-base/scripts/`:
 
 | Скрипт | Назначение |
 |--------|------------|
@@ -86,3 +101,26 @@
 - [ ] DocSearch KB не дублирует glossary (или помечает external)
 - [ ] it-portals/content/glossary — единственное место правок
 - [ ] ECOSYSTEM.md обновлён
+
+## Критерии «lab/tools готовы к выключению в KB»
+
+- [ ] lab.spirzen.ru и tools.spirzen.ru в проде с CI
+- [ ] embed play/code работают (fullscreen, тема, высота)
+- [ ] redirects spirzen.ru/lab и /tools отдают ITU loader, не пустую страницу
+- [ ] content/lab и content/tools закреплены в отдельных репо
+- [ ] docs/lab и docs/tools удалены из it-knowledge-base
+
+## Общий loader
+
+Канонические файлы: `it-portals/packages/shared/src/loader/itu-loader.{css,js}`.
+
+Копии и интеграции:
+
+| Репо | Где используется |
+|------|------------------|
+| it-knowledge-base | redirect pages (plugin `ituRedirectLoader`), ExternalPlay/CodeEmbed, lazy embed |
+| it-lab, it-tools | embed-host (iframe mask) |
+| it-play | EmbedLayout, demo fallbacks |
+| it-code-examples | EmbedLayout |
+
+При правках — синхронизировать CSS/разметку из shared package.
