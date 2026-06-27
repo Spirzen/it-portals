@@ -1,0 +1,15 @@
+{
+  "name": "@itu/portal-shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Общие компоненты, стили и утилиты порталов IT Universe",
+  "exports": {
+    "./ecosystem": "./src/ecosystem.mjs",
+    "./theme": "./src/theme.js",
+    "./*": "./src/*"
+  },
+  "files": [
+    "src"
+  ]
+}

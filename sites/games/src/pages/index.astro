@@ -1,0 +1,23 @@
+---
+import PortalLayout from '@itu/portal-shared/components/PortalLayout.astro';
+import {getPortalContext} from '../lib/portal.mjs';
+const {navItems, brandHref, brandLabel, ecosystemConfigJson} = getPortalContext();
+---
+
+<PortalLayout
+  title="Игры — IT Universe"
+  description="Game studies и разработка игр"
+  brandLabel={brandLabel}
+  brandHref={brandHref}
+  navItems={navItems}
+  ecosystemConfigJson={ecosystemConfigJson}
+>
+  <div class="portal-hero">
+    <h1>Игровой портал</h1>
+    <p>Game studies, разработка игр и связанные материалы spinoff-блока энциклопедии.</p>
+  </div>
+  <div class="placeholder-card">
+    <h2>В разработке</h2>
+    <p>Объединённый портал games + gamedev. Статус — см. docs/STATUS.md.</p>
+  </div>
+</PortalLayout>

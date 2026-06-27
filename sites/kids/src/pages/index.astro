@@ -1,0 +1,23 @@
+---
+import PortalLayout from '@itu/portal-shared/components/PortalLayout.astro';
+import {getPortalContext} from '../lib/portal.mjs';
+const {navItems, brandHref, brandLabel, ecosystemConfigJson} = getPortalContext();
+---
+
+<PortalLayout
+  title="Для детей — IT Universe"
+  description="IT-материалы для детей и начинающих"
+  brandLabel={brandLabel}
+  brandHref={brandHref}
+  navItems={navItems}
+  ecosystemConfigJson={ecosystemConfigJson}
+>
+  <div class="portal-hero">
+    <h1>IT для детей</h1>
+    <p>Упрощённый портал на базе spinoff 9-11 энциклопедии.</p>
+  </div>
+  <div class="placeholder-card">
+    <h2>В разработке</h2>
+    <p>Отдельный UX, больше play, меньше плотного текста.</p>
+  </div>
+</PortalLayout>

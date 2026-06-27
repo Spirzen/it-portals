@@ -1,0 +1,10 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@itu/portal-shared/*": ["../../packages/shared/src/*"],
+      "@itu/portal-markdown": ["../../packages/markdown/src/index.mjs"]
+    }
+  }
+}

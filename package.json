@@ -1,0 +1,38 @@
+{
+  "name": "it-portals",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Astro-порталы экосистемы «Вселенная IT» (terms, lab, games, kids, tools)",
+  "license": "MIT",
+  "type": "module",
+  "author": "Тагиров Тимур Владиславович",
+  "homepage": "https://terms.spirzen.ru",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Spirzen/it-portals.git"
+  },
+  "workspaces": [
+    "packages/*",
+    "sites/*"
+  ],
+  "scripts": {
+    "sync:glossary": "node packages/sync/sync-glossary.mjs",
+    "sync:lab": "node packages/sync/sync-lab.mjs",
+    "sync:all": "node packages/sync/sync-all.mjs",
+    "dev:terms": "npm run dev -w @itu/terms",
+    "dev:lab": "npm run dev -w @itu/lab",
+    "dev:games": "npm run dev -w @itu/games",
+    "dev:kids": "npm run dev -w @itu/kids",
+    "dev:tools": "npm run dev -w @itu/tools",
+    "build:terms": "npm run build -w @itu/terms",
+    "build:lab": "npm run build -w @itu/lab",
+    "build:games": "npm run build -w @itu/games",
+    "build:kids": "npm run build -w @itu/kids",
+    "build:tools": "npm run build -w @itu/tools",
+    "build:all": "npm run build --workspaces --if-present",
+    "preview:terms": "npm run preview -w @itu/terms"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

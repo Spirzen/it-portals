@@ -1,0 +1,18 @@
+{
+  "name": "@itu/portal-markdown",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Парсинг и рендер markdown контента порталов",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./*": "./src/*"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "remark": "^15.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-html": "^16.0.1",
+    "remark-parse": "^11.0.0"
+  }
+}

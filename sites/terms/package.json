@@ -1,0 +1,21 @@
+{
+  "name": "@itu/terms",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "terms.spirzen.ru — глоссарий IT Universe",
+  "scripts": {
+    "dev": "astro dev --port 4330",
+    "build": "astro build",
+    "preview": "astro preview --port 4330",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@itu/portal-markdown": "file:../../packages/markdown",
+    "@itu/portal-shared": "file:../../packages/shared",
+    "astro": "^5.10.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@itu/portal-sync",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Синхронизация контента из it-knowledge-base в it-portals/content",
+  "exports": {
+    ".": "./src/index.mjs"
+  },
+  "bin": {
+    "itu-sync-glossary": "./sync-glossary.mjs",
+    "itu-sync-lab": "./sync-lab.mjs"
+  }
+}

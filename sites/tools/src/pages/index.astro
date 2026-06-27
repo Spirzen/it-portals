@@ -1,0 +1,23 @@
+---
+import PortalLayout from '@itu/portal-shared/components/PortalLayout.astro';
+import {getPortalContext} from '../lib/portal.mjs';
+const {navItems, brandHref, brandLabel, ecosystemConfigJson} = getPortalContext();
+---
+
+<PortalLayout
+  title="Инструменты — IT Universe"
+  description="Каталог софта и онлайн-утилит экосистемы"
+  brandLabel={brandLabel}
+  brandHref={brandHref}
+  navItems={navItems}
+  ecosystemConfigJson={ecosystemConfigJson}
+>
+  <div class="portal-hero">
+    <h1>Инструменты</h1>
+    <p>Гайды по софту и хаб утилит (WebEditor, Schema Maker, SQL Generator…).</p>
+  </div>
+  <div class="placeholder-card">
+    <h2>В разработке</h2>
+    <p>Контент из <code>docs/tools</code> + перенос spirzen.github.io утилит на spirzen.ru.</p>
+  </div>
+</PortalLayout>

@@ -1,0 +1,30 @@
+---
+import PortalLayout from '@itu/portal-shared/components/PortalLayout.astro';
+import {getPortalContext} from '../lib/portal.mjs';
+
+const {navItems, brandHref, brandLabel, ecosystemConfigJson, config} = getPortalContext();
+---
+
+<PortalLayout
+  title="Лаборатория — IT Universe"
+  description="Практика, тренажёры и экзамены экосистемы Вселенная IT"
+  brandLabel={brandLabel}
+  brandHref={brandHref}
+  navItems={navItems}
+  ecosystemConfigJson={ecosystemConfigJson}
+>
+  <div class="portal-hero">
+    <h1>Лаборатория</h1>
+    <p>
+      Портал в разработке. Контент будет перенесён из <code>docs/lab</code> энциклопедии с сохранением
+      префикса <code>{config.routes.labPrefix}/</code>.
+    </p>
+  </div>
+  <div class="placeholder-card">
+    <h2>Скоро</h2>
+    <p>Тренажёры SQL, Git, экзамены и кейсы — с embed на play.spirzen.ru.</p>
+    <p>
+      <a href={navItems.find((n) => n.id === 'spirzen')?.href}>Вернуться в энциклопедию</a>
+    </p>
+  </div>
+</PortalLayout>

@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ecosystem URLs",
+  "type": "object",
+  "required": ["version", "domains", "routes"],
+  "properties": {
+    "version": { "type": "integer" },
+    "domains": {
+      "type": "object",
+      "additionalProperties": { "type": "string", "format": "uri" }
+    },
+    "routes": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "localDev": {
+      "type": "object",
+      "additionalProperties": { "type": "string", "format": "uri" }
+    }
+  }
+}
