@@ -1,9 +1,10 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {loaderMarkup} from '../loader/itu-loader.js';
+import {loaderMarkup} from './itu-loader.js';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const loaderCss = await fs.readFile(path.join(__dirname, '../loader/itu-loader.css'), 'utf8');
+const loaderCss = await fs.readFile(path.join(__dirname, 'itu-loader.css'), 'utf8');
 
 function resolveOutDir(dir) {
   if (typeof dir === 'string') {
