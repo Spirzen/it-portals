@@ -2,6 +2,7 @@ import {defineConfig} from 'astro/config';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import patchAstroRedirects from '../../../packages/shared/src/integrations/patch-astro-redirects.mjs';
+import ituSitemap from '../../../packages/shared/src/integrations/sitemap.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '../..');
@@ -13,7 +14,7 @@ export default defineConfig({
   site,
   base,
   output: 'static',
-  integrations: [patchAstroRedirects()],
+  integrations: [ituSitemap(), patchAstroRedirects()],
   vite: {
     resolve: {
       alias: {

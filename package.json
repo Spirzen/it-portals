@@ -1,30 +1,31 @@
 {
-  "name": "it-portals",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Хаб экосистемы «Вселенная IT» — status.spirzen.ru",
-  "license": "MIT",
-  "type": "module",
-  "author": "Тагиров Тимур Владиславович",
-  "homepage": "https://status.spirzen.ru",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Spirzen/it-portals.git"
-  },
-  "scripts": {
-    "dev": "astro dev --port 4335",
-    "check:status": "node scripts/check-status.mjs",
-    "prebuild": "node scripts/check-status.mjs",
-    "build": "astro build",
-    "preview": "astro preview --port 4335"
-  },
-  "dependencies": {
-    "astro": "^5.10.0"
-  },
-  "devDependencies": {
-    "typescript": "^5.9.3"
-  },
-  "engines": {
-    "node": ">=20.0.0"
-  }
+    "name":  "it-portals",
+    "version":  "1.0.0",
+    "private":  true,
+    "description":  "Хаб экосистемы «Вселенная IT» — status.spirzen.ru",
+    "license":  "MIT",
+    "type":  "module",
+    "author":  "Тагиров Тимур Владиславович",
+    "homepage":  "https://status.spirzen.ru",
+    "repository":  {
+                       "type":  "git",
+                       "url":  "https://github.com/Spirzen/it-portals.git"
+                   },
+    "scripts":  {
+                    "dev":  "astro dev --port 4335",
+                    "check:status":  "node scripts/check-status.mjs",
+                    "prebuild":  "node scripts/check-status.mjs",
+                    "build":  "astro build",
+                    "preview":  "astro preview --port 4335"
+                },
+    "dependencies":  {
+                         "astro":  "^5.10.0",
+                         "@astrojs/sitemap":  "^3.4.1"
+                     },
+    "devDependencies":  {
+                            "typescript":  "^5.9.3"
+                        },
+    "engines":  {
+                    "node":  "\u003e=20.0.0"
+                }
 }

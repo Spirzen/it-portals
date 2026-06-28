@@ -2,6 +2,7 @@ import {defineConfig} from 'astro/config';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import patchAstroRedirects from './packages/shared/src/integrations/patch-astro-redirects.mjs';
+import ituSitemap from './packages/shared/src/integrations/sitemap.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -13,7 +14,7 @@ export default defineConfig({
   base,
   output: 'static',
   trailingSlash: 'never',
-  integrations: [patchAstroRedirects()],
+  integrations: [ituSitemap({ excludeRoot: false }), patchAstroRedirects()],
   vite: {
     resolve: {
       alias: {

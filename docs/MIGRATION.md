@@ -35,6 +35,9 @@
 | ExternalPlayEmbed | ✅ | iframe play.spirzen.ru |
 | ExternalCodeEmbed | ✅ | iframe code.spirzen.ru |
 | LabTrainersHub | ✅ | каталог тренажёров + play embeds |
+| DeveloperExamPlay | ✅ | play embed `lab/developer-exam-play` + `article-exam` postMessage |
+| RandomQuestionFromArticle | ✅ | inline `article-question-picker.js` из DOM статьи |
+| DocCardList | ✅ | build-time карточки раздела в `load-lab.mjs` |
 | Deploy lab.spirzen.ru | ✅ | GitHub Pages |
 | KB: exclude `lab/**` | ✅ | docusaurus docs |
 | KB: redirects `/lab/*` | ✅ | `labExternalRedirects.json` (716 routes) |
@@ -55,7 +58,7 @@
 | Repo it-tools | ✅ | `tools.spirzen.ru`, порт 4334 |
 | Sync + routing | ✅ | 65 страниц, `/tools/{category}/{id}` |
 | ExternalPlayEmbed / CodeEmbed | ✅ | iframe + article chrome |
-| RandomGameGenerator | 🟡 | stub (список игр в MD ниже) |
+| RandomGameGenerator | ✅ | перенесён в games/9-031-gametools/4 |
 | KB integration | ✅ | exclude, redirects, sidebar, wikiLink |
 | Deploy tools.spirzen.ru | ✅ | push it-tools → CI |
 | ITU loader на embed | ✅ | зеркало it-lab |
@@ -82,8 +85,9 @@
 | Sync spinoff 9-11 → it-kids | ✅ | `npm run sync:kids` (80 MD) |
 | Маршруты `/games/…`, `/kids/…` | ✅ | catch-all + embed play/code |
 | Два раздела games (индустрия + gamedev) | ✅ | sidebar по `9-03` / `9-04` |
+| tools/games → `9-031-gametools` | ✅ | «Полезные инструменты», 6 страниц + redirects |
 | Kids UI theme | ✅ | `data-portal="kids"`, тёплая палитра |
-| Build games/kids | ✅ | 127 + 81 страниц |
+| Build games/kids | ✅ | 133 + 81 страниц |
 | KB: exclude spinoff paths | ✅ | docusaurus exclude |
 | KB: redirects | ✅ | `gamesExternalRedirects.json`, `kidsExternalRedirects.json` |
 | KB: wikiLinkIndex | ✅ | games + kids URLs |

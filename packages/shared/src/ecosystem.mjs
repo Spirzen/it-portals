@@ -107,4 +107,5 @@ export function absoluteRoute(config, routeKey, portalId, suffix = '') {
   return `${domain}${route}${suffix}`;
 }
 
+export {buildFooterSections, buildDocusaurusFooter, resolveFooterItemHref} from './ecosystem-footer.mjs';
 export {findRepoRoot};

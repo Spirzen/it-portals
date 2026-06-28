@@ -34,6 +34,7 @@
   }
 
   var brandHref = (config.domains[portalId] || '/').replace(/\/$/, '');
+  var mascotSrc = mount.dataset.mascotSrc || '/img/docusaurus.png';
   var navItems = config.nav.ecosystem || [];
 
   var linksHtml = navItems
@@ -59,7 +60,9 @@
     '<a class="ecosystem-nav__brand" href="' +
     brandHref +
     '">' +
-    '<span class="ecosystem-nav__brand-mark" aria-hidden="true">IT</span>' +
+    '<img class="ecosystem-nav__brand-mark" src="' +
+    mascotSrc +
+    '" alt="" width="28" height="28" decoding="async" />' +
     '<span>' +
     brandLabel +
     '</span></a>' +

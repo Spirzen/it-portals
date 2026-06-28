@@ -22,15 +22,42 @@ async function probe(url) {
     () => fetch(url, {method: 'GET', redirect: 'follow', signal: AbortSignal.timeout(TIMEOUT_MS)}),
   ];
 
+  /** @type {Response | null} */
+  let lastRes = null;
+
   for (const attempt of attempts) {
     try {
       const res = await attempt();
-      const latency = Date.now() - started;
-      const state = res.ok ? 'up' : res.status >= 500 ? 'down' : 'degraded';
-      return {state, httpStatus: res.status, latency, checkedAt: new Date().toISOString()};
+      lastRes = res;
+      if (res.ok) {
+        return {
+          state: 'up',
+          httpStatus: res.status,
+          latency: Date.now() - started,
+          checkedAt: new Date().toISOString(),
+        };
+      }
+      if (res.status >= 500) {
+        return {
+          state: 'down',
+          httpStatus: res.status,
+          latency: Date.now() - started,
+          checkedAt: new Date().toISOString(),
+        };
+      }
+      /* 4xx from HEAD — try GET before marking degraded */
     } catch {
       /* try next method */
     }
+  }
+
+  if (lastRes) {
+    return {
+      state: 'degraded',
+      httpStatus: lastRes.status,
+      latency: Date.now() - started,
+      checkedAt: new Date().toISOString(),
+    };
   }
 
   return {

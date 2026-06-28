@@ -1,5 +1,6 @@
 ---
 import EcosystemNav from './EcosystemNav.astro';
+import EcosystemFooter from './EcosystemFooter.astro';
 import '../styles/tokens.css';
 import '../styles/layout.css';
 
@@ -34,7 +35,7 @@ const {
     <meta name="color-scheme" content="light dark" />
     <title>{title}</title>
     {description ? <meta name="description" content={description} /> : null}
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
     <script is:inline id="itu-ecosystem-config" type="application/json" set:html={ecosystemConfigJson} />
     <script is:inline>
       (function () {
@@ -63,6 +64,7 @@ const {
         </div>
       </main>
     </div>
+    <EcosystemFooter />
     <script type="module">
       import '@itu/portal-shared/theme';
     </script>

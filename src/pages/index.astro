@@ -1,6 +1,7 @@
 ---
 import fs from 'node:fs';
 import path from 'node:path';
+import EcosystemFooter from '@/components/EcosystemFooter.astro';
 import '../styles/hub.css';
 import servicesData from '../data/services.json';
 
@@ -42,7 +43,7 @@ const grouped = Object.entries(categories).map(([key, cat]) => ({
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Хаб экосистемы «Вселенная IT» — все сервисы spirzen.ru в одном месте со статусом доступности." />
     <meta name="theme-color" content="#06060b" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
     <title>Вселенная IT — хаб экосистемы</title>
   </head>
   <body>
@@ -148,13 +149,7 @@ const grouped = Object.entries(categories).map(([key, cat]) => ({
         )
       ))}
 
-      <footer class="hub-footer">
-        <p>
-          Экосистема <a href="https://spirzen.ru">spirzen.ru</a> ·
-          проверка доступности каждые 10 мин ·
-          <a href="https://github.com/Spirzen/it-portals">it-portals</a>
-        </p>
-      </footer>
+      <EcosystemFooter />
     </main>
 
     <script define:vars={{ services }}>
