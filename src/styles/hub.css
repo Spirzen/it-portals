@@ -73,9 +73,138 @@ body {
 }
 
 .hub {
-  max-width: 1280px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 2.5rem 1.5rem 4rem;
+}
+
+/* ── Balanced hub (status.spirzen.ru) ── */
+
+.hub--balanced {
+  padding: 1.5rem 1.5rem 2rem;
+}
+
+.hub--balanced .hub-header {
+  margin-bottom: 1.25rem;
+}
+
+.hub--balanced .hub-badge {
+  margin-bottom: 0.85rem;
+}
+
+.hub--balanced .hub-title {
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  margin-bottom: 0.5rem;
+}
+
+.hub--balanced .hub-subtitle {
+  font-size: 0.95rem;
+  line-height: 1.45;
+  max-width: 40rem;
+}
+
+.hub--balanced .summary-bar {
+  margin: 0 0 1rem;
+  padding: 0.7rem 1rem;
+}
+
+.hub--balanced .summary-stat {
+  font-size: 0.88rem;
+}
+
+.hub--balanced .summary-stat strong {
+  font-size: 1.15rem;
+}
+
+.hub--balanced .toolbar {
+  margin-bottom: 1.1rem;
+}
+
+.hub--balanced .grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.hub--balanced .card {
+  gap: 0.55rem;
+  padding: 0.9rem 1rem 0.8rem;
+  border-radius: 14px;
+}
+
+.hub--balanced .card-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+}
+
+.hub--balanced .card-name {
+  font-size: 1rem;
+}
+
+.hub--balanced .card-domain {
+  font-size: 0.72rem;
+}
+
+.hub--balanced .card-desc {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.hub--balanced .card-footer {
+  padding-top: 0.25rem;
+  font-size: 0.72rem;
+}
+
+.hub--balanced .status-pill {
+  font-size: 0.68rem;
+  padding: 0.22rem 0.55rem;
+}
+
+.hub--balanced .ecosystem-footer {
+  margin-top: 1.5rem;
+  padding: 1.25rem 0 0.75rem;
+  background: transparent;
+  border-top: 1px solid var(--border);
+}
+
+.hub--balanced .ecosystem-footer__grid {
+  gap: 1rem 1.5rem;
+}
+
+.hub--balanced .ecosystem-footer__title {
+  font-size: 0.82rem;
+  margin-bottom: 0.45rem;
+}
+
+.hub--balanced .ecosystem-footer__list a {
+  font-size: 0.78rem;
+}
+
+.hub--balanced .ecosystem-footer__copy {
+  margin-top: 0.85rem;
+  padding-top: 0.65rem;
+  font-size: 0.75rem;
+}
+
+@media (max-width: 1100px) {
+  .hub--balanced .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .hub--balanced {
+    padding: 1.25rem 1rem 1.5rem;
+  }
+
+  .hub--balanced .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .hub-header {

@@ -29,11 +29,6 @@ const statusLabels: Record<string, string> = {
   unknown: 'Unknown',
 };
 
-const grouped = Object.entries(categories).map(([key, cat]) => ({
-  key,
-  ...cat,
-  items: services.filter((s) => s.category === key),
-}));
 ---
 
 <!doctype html>
@@ -49,7 +44,7 @@ const grouped = Object.entries(categories).map(([key, cat]) => ({
   <body>
     <div class="hub-bg" aria-hidden="true"></div>
 
-    <main class="hub">
+    <main class="hub hub--balanced">
       <header class="hub-header">
         <div class="hub-badge">
           <span class="hub-badge-dot" id="live-dot"></span>
@@ -58,7 +53,7 @@ const grouped = Object.entries(categories).map(([key, cat]) => ({
         <h1 class="hub-title">Вселенная IT</h1>
         <p class="hub-subtitle">
           Единый портал ко всем сервисам образовательной экосистемы —
-          энциклопедия, инструменты, лаборатории и интерактив в одной сетке.
+          энциклопедия, инструменты, лаборатории и интерактив.
         </p>
       </header>
 
@@ -104,50 +99,43 @@ const grouped = Object.entries(categories).map(([key, cat]) => ({
         </button>
       </div>
 
-      {grouped.map((group) => (
-        group.items.length > 0 && (
-          <section data-category-section={group.key}>
-            <h2 class="section-label">{group.label}</h2>
-            <div class="grid">
-              {group.items.map((svc) => {
-                const st = snapshot.services[svc.id];
-                const state = st?.state ?? 'unknown';
-                return (
-                  <a
-                    class="card"
-                    href={svc.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-service-id={svc.id}
-                    data-category={svc.category}
-                    data-search={`${svc.name} ${svc.domain} ${svc.description}`.toLowerCase()}
-                    style={`--card-accent: ${svc.accent}`}
-                  >
-                    <div class="card-top">
-                      <div class="card-icon" aria-hidden="true">{svc.glyph}</div>
-                      <span class="status-pill" data-state={state} data-status-for={svc.id}>
-                        <span class="status-dot"></span>
-                        <span class="status-label">{statusLabels[state] ?? state}</span>
-                      </span>
-                    </div>
-                    <div>
-                      <h3 class="card-name">{svc.name}</h3>
-                      <p class="card-domain">{svc.domain}</p>
-                    </div>
-                    <p class="card-desc">{svc.description}</p>
-                    <div class="card-footer">
-                      <span class="card-latency" data-latency-for={svc.id}>
-                        {st?.latency != null ? `${st.latency} ms` : '—'}
-                      </span>
-                      <span class="card-arrow" aria-hidden="true">↗</span>
-                    </div>
-                  </a>
-                );
-              })}
-            </div>
-          </section>
-        )
-      ))}
+      <div class="grid" id="services-grid">
+        {services.map((svc) => {
+          const st = snapshot.services[svc.id];
+          const state = st?.state ?? 'unknown';
+          return (
+            <a
+              class="card"
+              href={svc.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-service-id={svc.id}
+              data-category={svc.category}
+              data-search={`${svc.name} ${svc.domain} ${svc.description}`.toLowerCase()}
+              style={`--card-accent: ${svc.accent}`}
+            >
+              <div class="card-top">
+                <div class="card-icon" aria-hidden="true">{svc.glyph}</div>
+                <span class="status-pill" data-state={state} data-status-for={svc.id}>
+                  <span class="status-dot"></span>
+                  <span class="status-label">{statusLabels[state] ?? state}</span>
+                </span>
+              </div>
+              <div>
+                <h3 class="card-name">{svc.name}</h3>
+                <p class="card-domain">{svc.domain}</p>
+              </div>
+              <p class="card-desc">{svc.description}</p>
+              <div class="card-footer">
+                <span class="card-latency" data-latency-for={svc.id}>
+                  {st?.latency != null ? `${st.latency} ms` : '—'}
+                </span>
+                <span class="card-arrow" aria-hidden="true">↗</span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
 
       <EcosystemFooter />
     </main>
@@ -173,10 +161,6 @@ const grouped = Object.entries(categories).map(([key, cat]) => ({
           const matchCat = activeFilter === 'all' || card.dataset.category === activeFilter;
           const matchSearch = !q || (card.dataset.search ?? '').includes(q);
           card.classList.toggle('is-hidden', !(matchCat && matchSearch));
-        });
-        document.querySelectorAll('[data-category-section]').forEach((section) => {
-          const visible = section.querySelectorAll('.card:not(.is-hidden)').length > 0;
-          section.style.display = visible ? '' : 'none';
         });
       }
 
