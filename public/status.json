@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-17T22:19:50.495Z",
+  "generatedAt": "2026-08-17T22:44:48.899Z",
   "summary": {
     "total": 18,
     "up": 16,
@@ -14,8 +14,8 @@
       "url": "https://spirzen.ru",
       "state": "up",
       "httpStatus": 200,
-      "latency": 296,
-      "checkedAt": "2026-08-17T22:19:48.946Z"
+      "latency": 467,
+      "checkedAt": "2026-08-17T22:44:46.726Z"
     },
     "search": {
       "id": "search",
@@ -23,8 +23,8 @@
       "url": "https://search.spirzen.ru",
       "state": "up",
       "httpStatus": 200,
-      "latency": 240,
-      "checkedAt": "2026-08-17T22:19:48.949Z"
+      "latency": 513,
+      "checkedAt": "2026-08-17T22:44:46.812Z"
     },
     "assets": {
       "id": "assets",
@@ -32,8 +32,8 @@
       "url": "https://assets.spirzen.ru",
       "state": "up",
       "httpStatus": 200,
-      "latency": 511,
-      "checkedAt": "2026-08-17T22:19:49.221Z"
+      "latency": 782,
+      "checkedAt": "2026-08-17T22:44:47.082Z"
     },
     "terms": {
       "id": "terms",
@@ -41,8 +41,8 @@
       "url": "https://terms.spirzen.ru",
       "state": "up",
       "httpStatus": 200,
-      "latency": 395,
-      "checkedAt": "2026-08-17T22:19:49.107Z"
+      "latency": 856,
+      "checkedAt": "2026-08-17T22:44:47.158Z"
     },
     "lab": {
       "id": "lab",
@@ -50,8 +50,8 @@
       "url": "https://lab.spirzen.ru",
       "state": "up",
       "httpStatus": 200,
-      "latency": 567,
-      "checkedAt": "2026-08-17T22:19:49.280Z"
+      "latency": 936,
+      "checkedAt": "2026-08-17T22:44:47.238Z"
     },
     "exam": {
       "id": "exam",
@@ -59,8 +59,8 @@
       "url": "https://exam.spirzen.ru",
       "state": "down",
       "httpStatus": 0,
-      "latency": 1607,
-      "checkedAt": "2026-08-17T22:19:50.321Z"
+      "latency": 2406,
+      "checkedAt": "2026-08-17T22:44:48.709Z"
     },
     "quiz": {
       "id": "quiz",
@@ -68,8 +68,8 @@
       "url": "https://quiz.spirzen.ru",
       "state": "down",
       "httpStatus": 0,
-      "latency": 1600,
-      "checkedAt": "2026-08-17T22:19:50.315Z"
+      "latency": 2403,
+      "checkedAt": "2026-08-17T22:44:48.706Z"
     },
     "kids": {
       "id": "kids",
@@ -77,8 +77,8 @@
       "url": "https://kids.spirzen.ru",
       "state": "up",
       "httpStatus": 200,
-      "latency": 804,
-      "checkedAt": "2026-08-17T22:19:49.520Z"
+      "latency": 1336,
+      "checkedAt": "2026-08-17T22:44:47.640Z"
     },
     "code": {
       "id": "code",
@@ -86,8 +86,8 @@
       "url": "https://code.spirzen.ru",
       "state": "up",
       "httpStatus": 200,
-      "latency": 872,
-      "checkedAt": "2026-08-17T22:19:49.589Z"
+      "latency": 1524,
+      "checkedAt": "2026-08-17T22:44:47.829Z"
     },
     "play": {
       "id": "play",
@@ -95,8 +95,8 @@
       "url": "https://play.spirzen.ru",
       "state": "up",
       "httpStatus": 200,
-      "latency": 979,
-      "checkedAt": "2026-08-17T22:19:49.697Z"
+      "latency": 1653,
+      "checkedAt": "2026-08-17T22:44:47.958Z"
     },
     "html": {
       "id": "html",
@@ -104,8 +104,8 @@
       "url": "https://html.spirzen.ru",
       "state": "up",
       "httpStatus": 200,
-      "latency": 1160,
-      "checkedAt": "2026-08-17T22:19:49.879Z"
+      "latency": 1919,
+      "checkedAt": "2026-08-17T22:44:48.225Z"
     },
     "writer": {
       "id": "writer",
@@ -113,8 +113,8 @@
       "url": "https://writer.spirzen.ru",
       "state": "up",
       "httpStatus": 200,
-      "latency": 1136,
-      "checkedAt": "2026-08-17T22:19:49.856Z"
+      "latency": 1779,
+      "checkedAt": "2026-08-17T22:44:48.086Z"
     },
     "schema": {
       "id": "schema",
@@ -122,8 +122,8 @@
       "url": "https://schema.spirzen.ru",
       "state": "up",
       "httpStatus": 200,
-      "latency": 1291,
-      "checkedAt": "2026-08-17T22:19:50.012Z"
+      "latency": 2089,
+      "checkedAt": "2026-08-17T22:44:48.396Z"
     },
     "sql": {
       "id": "sql",
@@ -131,8 +131,8 @@
       "url": "https://sql.spirzen.ru",
       "state": "up",
       "httpStatus": 200,
-      "latency": 1315,
-      "checkedAt": "2026-08-17T22:19:50.037Z"
+      "latency": 2155,
+      "checkedAt": "2026-08-17T22:44:48.463Z"
     },
     "tools": {
       "id": "tools",
@@ -140,8 +140,8 @@
       "url": "https://tools.spirzen.ru",
       "state": "up",
       "httpStatus": 200,
-      "latency": 1449,
-      "checkedAt": "2026-08-17T22:19:50.172Z"
+      "latency": 2270,
+      "checkedAt": "2026-08-17T22:44:48.578Z"
     },
     "color": {
       "id": "color",
@@ -149,8 +149,8 @@
       "url": "https://color.spirzen.ru",
       "state": "up",
       "httpStatus": 200,
-      "latency": 1496,
-      "checkedAt": "2026-08-17T22:19:50.220Z"
+      "latency": 2268,
+      "checkedAt": "2026-08-17T22:44:48.577Z"
     },
     "random": {
       "id": "random",
@@ -158,8 +158,8 @@
       "url": "https://random.spirzen.ru",
       "state": "up",
       "httpStatus": 200,
-      "latency": 1622,
-      "checkedAt": "2026-08-17T22:19:50.347Z"
+      "latency": 2444,
+      "checkedAt": "2026-08-17T22:44:48.753Z"
     },
     "games": {
       "id": "games",
@@ -167,8 +167,8 @@
       "url": "https://games.spirzen.ru",
       "state": "up",
       "httpStatus": 200,
-      "latency": 1769,
-      "checkedAt": "2026-08-17T22:19:50.495Z"
+      "latency": 2589,
+      "checkedAt": "2026-08-17T22:44:48.899Z"
     }
   }
 }
